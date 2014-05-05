@@ -51,7 +51,7 @@
 				html.push(getSelectHTML(key, value));
 			});
 
-			html.push(getButtonHTML());
+			html.push(getExtraHTML());
 
 			scope.append(html.join(''));
 		};
@@ -64,12 +64,16 @@
 		var getInputHTML = function () {
 			var str = [];
 
-			str.push('<label for="name">Nome</label>');
-			str.push('<input type="text" name="name" id="name" required>');
-			str.push('<label for="email">Email</label>');
-			str.push('<input type="text" name="email" id="email" required>');
+			str.push('<div class="form-group">');
+			str.push('	<label for="name">Nome</label>');
+			str.push('	<input type="text" name="name" id="name" class="form-control" required>');
+			str.push('</div>');
+			str.push('<div class="form-group">');
+			str.push('	<label for="email">Email</label>');
+			str.push('	<input type="text" name="email" id="email" class="form-control" required>');
+			str.push('</div>');
 
-			return str;
+			return str.join('');
 		};
 
 
@@ -82,15 +86,17 @@
 		var getSelectHTML = function (field, options) {
 			var str = [];
 
-			str.push('<select name="' + field + '" id="' + field + '">');
+			str.push('<div class="form-group">');
+			str.push('	<select name="' + field + '" id="' + field + '" class="form-control">');
 
 			for (var i = 0, len = options.length; i < len; i++) {
 				str.push('<option value="' + options[i] + '">' + options[i] + '</option>');
 			}
 
-			str.push('</select>');
+			str.push('	</select>');
+			str.push('</div>');
 
-			return str;
+			return str.join('');
 		};
 
 
@@ -98,12 +104,16 @@
 		 * Creates HTML for send button element.
 		 * @return {array} Object array containing the HTML to be attached.
 		 */
-		var getButtonHTML = function () {
+		var getExtraHTML = function () {
 			var str = [];
 
-			str.push('<button type="submit">Enviar</button>');
+			str.push('<div class="form-group">');
+			str.push('	<button type="submit" class="btn btn-primary">Enviar</button>');
+			str.push('</div>');
+			str.push('<p class="alert alert-danger">Erro ao enviar formulário. Por favor, tente novamente.</p>');
+			str.push('<p class="alert alert-success">Formulário foi enviado com sucesso.</p>');
 
-			return str;
+			return str.join('');
 		};
 
 
@@ -129,11 +139,11 @@
 					url: '#',
 					data: data,
 					error: function () {
-						showFeedback('error', 'Erro ao enviar formulário. Por favor, tente novamente.');
+						showFeedback('error');
 					},
 					success: function () {
-						console.log(data);s
-						showFeedback('success', 'Formulário foi enviado com sucesso.');
+						console.log(data);
+						showFeedback('success');
 					}
 				});
 			});
@@ -141,12 +151,20 @@
 
 
 		/**
-		 * Shown a feedback popup according to the type.
-		 * @param  {string} type    The CSS class to stylize.
-		 * @param  {string} message Message that will be shown.
+		 * Shown a feedback message.
+		 * @param  {string} type    The message type.
 		 */
-		var showFeedback = function (type, message) {
-			alert(message);
+		var showFeedback = function (type) {
+			if (type === 'success') {
+				scope.find('.alert-success').fadeIn(function () {
+					$(this).delay(3000).fadeOut();
+				});
+			} 
+			else {
+				scope.find('.alert-danger').fadeIn(function () {
+					$(this).delay(3000).fadeOut();
+				});
+			}
 		};
 
 

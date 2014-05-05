@@ -3,16 +3,40 @@
 <head>
 	<title>jQuery Dynamic Form</title>
 	<meta charset="UTF-8">
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/bootstrap-theme.min.css">
 	<link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-	
-	<h1>jQuery Dynamic Form</h1>
-	<p>This is a jQuery plugin created for tests.</p>
-
-	<form class="dynamic-form" method="post" action="javascript:;"></form>
+	<div class="row">
+		<div class="col-md-6 col-md-offset-3">
+			<h1>jQuery Dynamic Form</h1>
+			<p>This is a jQuery plugin created for tests.</p>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-6 col-md-offset-3">
+			<button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#modal">
+			  Abrir formulário
+			</button>	
+		</div>
+	</div>
+	<div class="modal fade" id="modal">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+	        <h4 class="modal-title" id="myModalLabel">Preencha o formulário</h4>
+	      </div>
+	      <div class="modal-body">
+	        <form class="dynamic-form" method="post" action="javascript:;"></form>
+	      </div>
+	    </div>
+	  </div>
+	</div>
 
 	<script src="js/jquery-1.11.1.js"></script>
+	<script src="js/bootstrap.min.js"></script>
 	<script src="js/jquery-dynamicform.js"></script>
 	<script>
 		$(document).ready(function () {
